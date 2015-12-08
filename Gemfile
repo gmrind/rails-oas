@@ -12,6 +12,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass'
 gem 'twitter-bootstrap-rails'
 gem 'devise'
+gem 'cancan'
 
 group :development, :test do
   gem 'byebug'

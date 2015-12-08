@@ -1,0 +1,19 @@
+<h2>User Profile</h2>
+
+<p>
+  <%= @user.role.titleize %>
+</p>
+
+<p>
+  <%= @user.username %>
+</p>
+
+<p>
+  <%= @user.email %>
+</p>
+
+<p>
+  <% @user.takes.each do |take| %>
+    <%= take.course.title %>
+  <% end %>
+</p>
