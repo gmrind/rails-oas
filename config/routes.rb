@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   resources :users
   resources :courses
   resources :takes
+  resources :sessionenrolls
+  resources :coursesessions
 
 end

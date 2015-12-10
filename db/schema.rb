@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207201607) do
+ActiveRecord::Schema.define(version: 20151210130838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,53 @@ ActiveRecord::Schema.define(version: 20151207201607) do
   end
 
   add_index "courses", ["user_id"], name: "index_courses_on_user_id", using: :btree
+
+  create_table "coursesessions", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "coursesessions", ["user_id"], name: "index_coursesessions_on_user_id", using: :btree
+
+  create_table "enrolls", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "session_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "enrolls", ["session_id"], name: "index_enrolls_on_session_id", using: :btree
+  add_index "enrolls", ["user_id"], name: "index_enrolls_on_user_id", using: :btree
+
+  create_table "session_courses", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "session_courses", ["user_id"], name: "index_session_courses_on_user_id", using: :btree
+
+  create_table "sessionenrolls", force: :cascade do |t|
+    t.integer  "coursesession_id"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "sessionenrolls", ["coursesession_id"], name: "index_sessionenrolls_on_coursesession_id", using: :btree
+  add_index "sessionenrolls", ["user_id"], name: "index_sessionenrolls_on_user_id", using: :btree
+
+  create_table "sessions", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sessions", ["user_id"], name: "index_sessions_on_user_id", using: :btree
 
   create_table "somenothings", force: :cascade do |t|
     t.string   "name"
@@ -81,6 +128,13 @@ ActiveRecord::Schema.define(version: 20151207201607) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "courses", "users"
+  add_foreign_key "coursesessions", "users"
+  add_foreign_key "enrolls", "sessions"
+  add_foreign_key "enrolls", "users"
+  add_foreign_key "session_courses", "users"
+  add_foreign_key "sessionenrolls", "coursesessions"
+  add_foreign_key "sessionenrolls", "users"
+  add_foreign_key "sessions", "users"
   add_foreign_key "takes", "courses"
   add_foreign_key "takes", "users"
 end

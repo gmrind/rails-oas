@@ -22,11 +22,11 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
+        format.html { redirect_to courses_url, notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.json { render json: courses_url.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -34,11 +34,11 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
+        format.html { redirect_to courses_url, notice: 'Course was successfully updated.' }
         format.json { render :show, status: :ok, location: @course }
       else
         format.html { render :edit }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.json { render json: courses_url.errors, status: :unprocessable_entity }
       end
     end
   end

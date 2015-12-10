@@ -17,9 +17,9 @@
       <td><%= user.role.titleize %></td>
       <td><%= user.email %></td>
         <% if user.takes.exists? %>
-          <% user.takes.each do |take| %>
-            <td><%= take.course.title %></td>
-          <% end %>
+          <td><% user.takes.each do |take| %>
+            <%= take.course.title %><br>
+          <% end %></td>
         <% else %>
           <td>Not Selected</td>
         <% end %>
