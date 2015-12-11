@@ -1,19 +1,16 @@
-<h2>User Profile</h2>
+<%= render 'userinfo' %>
 
-<p>
-  <%= @user.role.titleize %>
-</p>
-
-<p>
-  <%= @user.username %>
-</p>
-
-<p>
-  <%= @user.email %>
-</p>
-
-<p>
-  <% @user.takes.each do |take| %>
-    <%= take.course.title %>
-  <% end %>
-</p>
+<table class="table">
+  <tr>
+    <%= render 'first_semester' %>
+  </tr>
+  <tr>
+    <%= render 'second_semester' %>
+  </tr>
+  <tr>
+    <%= render 'third_semester' %>
+  </tr>
+  <tr>
+    <%= render 'forth_semester' %>
+  </tr>
+</table>
